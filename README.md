@@ -62,7 +62,16 @@ To run the Flutter Notes App, follow these steps:
         flutter pub get
     ```
 
-4.  Run the application:
+4. Generate the necessary files:
+    ```bash
+        dart run build_runner build --delete-conflicting-outputs
+
+        OR 
+
+        flutter pub run build_runner build --delete-conflicting-outputs
+    ```
+
+5.  Run the application:
     ```bash
         flutter run
     ```
@@ -72,3 +81,6 @@ To run tests, use the following command:
 ```bash
     flutter test
 ```
+
+
+TODO Martin errors 
