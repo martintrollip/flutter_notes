@@ -90,3 +90,4 @@ TODO Martin add features list like swipe to refresh, etc.
 TODO Martin add recommendations like arb and other features
 TODO more well defined exceptions from the remote source and handling 
 TODO Martin setup github action and a status badge
+TODO Martin snap bar for errors and success messages
