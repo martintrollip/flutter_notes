@@ -101,17 +101,32 @@ To run tests, use the following command:
 4.  Add GitHub Actions to run tests and dart analyze on every push.
 5.  Add swipe to refresh functionality on the `NotesListPage`.
 
-# Attribution
+## Screenshots
 
-## Architecture
+<table>
+  <tr>
+    <td><img src="docs/screenshots/6.png" alt="Splash screen" width="250"/></td>
+    <td><img src="docs/screenshots/1.png" alt="Empty list" width="250"/></td>
+    <td><img src="docs/screenshots/2.png" alt="Error screen" width="250"/></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/10.png" alt="Form validation" width="250"/></td>
+    <td><img src="docs/screenshots/3.png" alt="Example input" width="250"/></td>
+    <td><img src="docs/screenshots/5.png" alt="Snackbar confirmation" width="250"/></td>
+  </tr>
+  <tr>
+    <td><img src="docs/screenshots/0.png" alt="Full list" width="250"/></td>
+    <td><img src="docs/screenshots/7.png" alt="Delete option" width="250"/></td>
+    <td><img src="docs/screenshots/8.png" alt="Delete confirmation" width="250"/></td>
+  </tr>
+</table>
+
+## Attribution
+
+### Architecture
 
 Thanks to [Reso Coder](https://resocoder.com/flutter-clean-architecture/) for the architecture diagram and the Clean Architecture principles used in this project.
 
-## Icon
+### Icon
 
-Sticky Note free icon designed by [Freepik](https://www.flaticon.com/free-icon/sticky-note_5942791?term=note) from [Flaticon](https://www.flaticon.com/)
-
-
-TODO Screenshots of the app in action.
-TODO Martin add screenshots here
-TODO Martin add app icons (also in the readme)
+Sticky Note free icon designed by [Freepik](https://www.flaticon.com/free-icon/sticky-note_5942791?term=note) from [Flaticon](https://www.flaticon.com/). Generated for all platforms using [flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)
