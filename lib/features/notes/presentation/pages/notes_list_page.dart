@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_notes/features/notes/presentation/bloc/notes_bloc.dart';
+import 'package:flutter_notes/features/notes/presentation/pages/pages.dart';
 import 'package:flutter_notes/features/notes/presentation/widgets/message_display.dart';
 
 class NotesListPage extends StatelessWidget {
@@ -55,7 +56,12 @@ class NotesListPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // TODO: Navigate to Add/Edit Note Page
+          Navigator.push(
+            context,
+            MaterialPageRoute<void>(
+              builder: (_) => const AddEditNotePage(note: null),
+            ),
+          );
         },
         tooltip: 'Add Note',
         child: const Icon(Icons.add),
