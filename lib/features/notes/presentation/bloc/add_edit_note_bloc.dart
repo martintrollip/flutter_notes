@@ -58,7 +58,6 @@ class AddEditNoteBloc extends Bloc<AddEditNoteEvent, AddEditNoteState> {
     Emitter<AddEditNoteState> emit,
   ) async {
     if (!state.isFormValid) {
-      // TODO Martin show validation error
       return;
     }
 

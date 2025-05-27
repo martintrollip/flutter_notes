@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_catches_without_on_clauses
+
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -22,7 +24,7 @@ class NotesRepositoryImplementation implements NotesRepository {
       );
     } on HttpException catch (e) {
       return Future.value(Left(ServerFailure(message: e.message)));
-    } on Exception catch (e) {
+    } catch (e) {
       return Future.value(Left(GeneralFailure(message: e.toString())));
     }
   }
@@ -34,7 +36,7 @@ class NotesRepositoryImplementation implements NotesRepository {
       return const Right(null);
     } on HttpException catch (e) {
       return Future.value(Left(ServerFailure(message: e.message)));
-    } on Exception catch (e) {
+    } catch (e) {
       return Future.value(Left(GeneralFailure(message: e.toString())));
     }
   }
@@ -46,7 +48,7 @@ class NotesRepositoryImplementation implements NotesRepository {
       return Right(notes);
     } on HttpException catch (e) {
       return Future.value(Left(ServerFailure(message: e.message)));
-    } on Exception catch (e) {
+    } catch (e) {
       return Future.value(Left(GeneralFailure(message: e.toString())));
     }
   }
@@ -66,7 +68,7 @@ class NotesRepositoryImplementation implements NotesRepository {
       return Right(note);
     } on HttpException catch (e) {
       return Future.value(Left(ServerFailure(message: e.message)));
-    } on Exception catch (e) {
+    } catch (e) {
       return Future.value(Left(GeneralFailure(message: e.toString())));
     }
   }

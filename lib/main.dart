@@ -25,6 +25,7 @@ class FlutterNotes extends StatelessWidget {
         create: (_) => di.sl<NotesBloc>()..add(const NotesEvent.getAllNotes()),
         child: const NotesListPage(),
       ),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

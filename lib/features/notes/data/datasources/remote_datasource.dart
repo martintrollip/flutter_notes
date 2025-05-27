@@ -42,7 +42,7 @@ abstract class RemoteDatasource {
 /// network latency.
 /// - Fails with a 10% chance to simulate server errors.
 class RemoteDatasourceImpl implements RemoteDatasource {
-  RemoteDatasourceImpl({this.source = const []});
+  RemoteDatasourceImpl({List<Note>? source}) : source = source ?? [];
 
   // In-memory store for notes
   final List<Note> source;
