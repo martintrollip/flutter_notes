@@ -46,6 +46,13 @@ This project implements **Clean Architecture** principles to ensure a separation
 
 ## Getting Started
 
+### Prerequisites
+
+To run this project, you need to have the following installed:
+-   Flutter SDK 
+
+### Running the App
+
 To run the Flutter Notes App, follow these steps:
 1.  Clone the repository:
     ```bash
@@ -81,6 +88,7 @@ To run tests, use the following command:
 ```bash
     flutter test
 ```
+
 TODO Prerequisites install Flutter SDK, Dart SDK, and any other dependencies.
 TODO Screenshots of the app in action.
 TODO Martin errors (server vs no data) and how the data was mocked
@@ -91,3 +99,18 @@ TODO Martin add recommendations like arb and other features
 TODO more well defined exceptions from the remote source and handling 
 TODO Martin setup github action and a status badge
 TODO Martin snap bar for errors and success messages
+TODO Martin remove example package name 
+
+TODO Martin refresh indicator
+//TODO Martin
+// RefreshIndicator
+//  onRefresh: () async {
+        //   final bloc = context.read<NotesBloc>();
+        //   context.read<NotesBloc>().add(const NotesEvent.refreshNotes());
+        //   await bloc.stream.firstWhere(
+        //     (state) => state.status == NotesListStatus.loading,
+        //   );
+        //   await bloc.stream.firstWhere(
+        //     (state) => state.status != NotesListStatus.loading,
+        //   );
+        // },

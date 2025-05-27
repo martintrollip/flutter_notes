@@ -21,22 +21,21 @@ class NotesListPage extends StatelessWidget {
               return const Center(child: CircularProgressIndicator());
             case NotesListStatus.empty:
               return const MessageDisplay(
-                icon: Icons.inbox_outlined,
+                icon: Icons.notes_rounded,
                 message: 'Tap + to add your first note!',
               );
             case NotesListStatus.failure:
               return MessageDisplay(
-                icon: Icons.error_outline,
+                icon: Icons.error_outline_rounded,
                 message: state.errorMessage ?? 'Unknown error',
               );
             case NotesListStatus.success:
-              final notes = state.notes;
-              if (notes == null || notes.isEmpty) {
-                return const MessageDisplay(
-                  icon: Icons.notes_outlined,
-                  message: 'No notes yet. Add one!',
-                );
-              }
+              final notes = state.notes ?? [];
+              assert(
+                notes.isNotEmpty,
+                'Notes should not be empty when status is success',
+              );
+
               return ListView.builder(
                 itemCount: notes.length,
                 itemBuilder: (context, index) {
