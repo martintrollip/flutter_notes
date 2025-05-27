@@ -1,3 +1,5 @@
+<div align="center"><img src="docs/sticky-note.png"/></div>
+
 # Flutter Notes App
 
 A simple note-taking application built with Flutter. This project makes use of best practices for Flutter architecture, state management, and API integration.
@@ -25,7 +27,7 @@ The application implements the following core functionalities across a minimal s
 
 ## Architecture
 
-![Reso Architecture](/docs/arch_reso.webp)
+![Resocoder Architecture](/docs/arch_reso.webp)
 
 This project implements **Clean Architecture** principles to ensure a separation of concerns, making the application more testable, maintainable, and scalable. The architecture is divided into three main layers:
 
@@ -94,12 +96,24 @@ To run tests, use the following command:
 ## Future Improvements
 
 1.  Implement persistent storage for notes (e.g., using SQLite or shared preferences).
-2.  Add unit tests for the `notes_list_page` and `injection_container`.
+2.  Add unit tests for the `notes_list_page`, `note_card` and `injection_container`.
 3.  Add internationalisation support and move all strings to an `.arb` file.
 4.  Add GitHub Actions to run tests and dart analyze on every push.
 5.  Add swipe to refresh functionality on the `NotesListPage`.
+
+# Attribution
+
+## Architecture
+
+Thanks to [Reso Coder](https://resocoder.com/flutter-clean-architecture/) for the architecture diagram and the Clean Architecture principles used in this project.
+
+## Icon
+
+Sticky Note free icon designed by [Freepik](https://www.flaticon.com/free-icon/sticky-note_5942791?term=note) from [Flaticon](https://www.flaticon.com/)
+
 
 TODO Screenshots of the app in action.
 TODO Martin add screenshots here
 TODO Martin add app icons (also in the readme)
 TODO Martin remove example package name 
+TODO Martin review and make sure that all state and events are used 
