@@ -29,22 +29,6 @@ dev_dependencies:
   json_serializable: ^6.9.5
   mockito: ^5.4.6
   mocktail: ^1.0.4
-  flutter_launcher_icons: ^0.14.3
 
 flutter:
   uses-material-design: true
-
-flutter_launcher_icons:
-  android: true
-  ios: true
-  remove_alpha_ios: true
-  image_path: "assets/icon/app_icon.png" 
-  web:
-    generate: true
-    image_path: "assets/icon/app_icon.png" 
-  windows:
-    generate: true
-    image_path: "assets/icon/app_icon.png" 
-  macos:
-    generate: true
-    image_path: "assets/icon/app_icon.png"
