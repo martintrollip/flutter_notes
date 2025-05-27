@@ -1,4 +1,4 @@
-<div align="center"><img src="docs/sticky-note.png"/></div>
+<div align="center"><img src="assets/icon/app_icon.png" width=120/></div>
 
 # Flutter Notes App
 
@@ -115,5 +115,3 @@ Sticky Note free icon designed by [Freepik](https://www.flaticon.com/free-icon/s
 TODO Screenshots of the app in action.
 TODO Martin add screenshots here
 TODO Martin add app icons (also in the readme)
-TODO Martin remove example package name 
-TODO Martin review and make sure that all state and events are used 
