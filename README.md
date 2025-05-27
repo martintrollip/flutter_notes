@@ -34,7 +34,7 @@ This project implements **Clean Architecture** principles to ensure a separation
   
 2.  **Domain Layer:**
     *   Contains the core business logic and rules of the application.
-    *   Includes Entities (business objects, e.g., `NoteEntity`), Use Cases (application-specific business rules, e.g., `GetAllNotes`, `CreateNote`), and Repository Contracts (abstract interfaces for data operations).
+    *   Includes Entities (business objects, e.g., `Note` entity), Use Cases (application-specific business rules, e.g., `GetAllNotes`, `CreateNote`), and Repository Contracts (abstract interfaces for data operations).
     *   This layer is independent of any framework or infrastructure details.
   
 3.  **Data Layer:**
@@ -81,6 +81,12 @@ To run tests, use the following command:
 ```bash
     flutter test
 ```
-
-
-TODO Martin errors 
+TODO Prerequisites install Flutter SDK, Dart SDK, and any other dependencies.
+TODO Screenshots of the app in action.
+TODO Martin errors (server vs no data) and how the data was mocked
+TODO Martin add screenshots here
+TODO Martin add app icons (also in the readme)
+TODO Martin add features list like swipe to refresh, etc.
+TODO Martin add recommendations like arb and other features
+TODO more well defined exceptions from the remote source and handling 
+TODO Martin setup github action and a status badge

@@ -21,7 +21,11 @@ abstract class RemoteDatasource {
   ///
   /// Returns the updated [Note].
   /// Throws a [Exception] for all error codes.
-  Future<Note> updateNote(Note note);
+  Future<Note> updateNote({
+    required String id,
+    required String title,
+    required String content,
+  });
 
   /// Deletes a note from the server by its [id].
   /// Throws a [Exception] for all error codes.
@@ -87,19 +91,23 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   }
 
   @override
-  Future<Note> updateNote(Note note) async {
+  Future<Note> updateNote({
+    required String id,
+    required String title,
+    required String content,
+  }) async {
     await _simulateNetworkDelay();
     _simulatePotentialServerError();
 
-    final existingNoteIndex = source.indexWhere((n) => n.id == note.id);
+    final existingNoteIndex = source.indexWhere((n) => n.id == id);
     if (existingNoteIndex == -1) {
-      throw Exception('Note with ID ${note.id} not found');
+      throw Exception('Note with ID $id not found');
     }
 
     final existingNote = source[existingNoteIndex];
     final updatedNote = existingNote.copyWith(
-      title: note.title,
-      content: note.content,
+      title: title,
+      content: content,
       updatedAt: DateTime.now(),
     );
 

@@ -3,30 +3,12 @@
 import 'package:flutter_notes/features/notes/data/datasources/remote_datasource.dart';
 import 'package:flutter_notes/features/notes/domain/entities/note.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:uuid/uuid.dart';
+
+import '../../../../helpers/constants.dart';
 
 void main() {
   late RemoteDatasourceImpl dataSource;
   late List<Note> notesListForDataSource;
-
-  const tUuid = Uuid();
-  final tNow = DateTime.now();
-
-  Note createTestNote1() => Note(
-    id: tUuid.v4(),
-    title: 'Test Note 1',
-    content: 'Content 1',
-    createdAt: tNow,
-    updatedAt: tNow,
-  );
-
-  Note createTestNote2() => Note(
-    id: tUuid.v4(),
-    title: 'Test Note 2',
-    content: 'Content 2',
-    createdAt: tNow.subtract(const Duration(days: 1)),
-    updatedAt: tNow.subtract(const Duration(days: 1)),
-  );
 
   setUp(() {
     notesListForDataSource = [];
@@ -99,9 +81,6 @@ void main() {
   });
 
   group('createNote', () {
-    const tTitle = 'New Note Title';
-    const tContent = 'New Note Content';
-
     test(
       'should add the new note to the source list and return it when no server error occurs',
       () async {
@@ -165,7 +144,11 @@ void main() {
 
         // Act
         try {
-          resultNote = await dataSource.updateNote(updatedDetails);
+          resultNote = await dataSource.updateNote(
+            id: updatedDetails.id,
+            title: updatedDetails.title,
+            content: updatedDetails.content,
+          );
         } on Exception catch (e) {
           caughtException = e;
         }
@@ -214,7 +197,11 @@ void main() {
 
         // Act
         try {
-          await dataSource.updateNote(nonExistentNote);
+          await dataSource.updateNote(
+            id: nonExistentNote.id,
+            title: nonExistentNote.title,
+            content: nonExistentNote.content,
+          );
         } on Exception catch (e) {
           caughtException = e;
         }
