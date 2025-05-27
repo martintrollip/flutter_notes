@@ -43,8 +43,8 @@ This project implements **Clean Architecture** principles to ensure a separation
   
 3.  **Data Layer:**
     *   Responsible for data retrieval and storage.
-    *   Includes Repository Implementations (concrete implementations of the domain layer's repository contracts), Data Sources (which can be remote like an API or local like a database/mocked data), and Models (data transfer objects that might include serialization logic, e.g., `NoteModel`).
-    *   API calls (Fetch all notes, Create/update a note, Delete a note) are mocked in this layer using `Future.delayed` or a similar mechanism.
+    *   Includes Repository Implementations (concrete implementations of the domain layer's repository contracts), Data Sources (which can be remote like an API or local like a database/mocked data), and Models (data transfer objects that might include serialisation logic, e.g., `NoteModel`).
+    *   API calls (Fetch all notes, Create/update a note, Delete a note) are mocked in this layer using `Future.delayed`.
 
 **Dependency Injection:** `get_it` is used to manage dependencies between layers and components.
 
@@ -99,7 +99,7 @@ To run tests, use the following command:
     1.  This can be achieved by updating the remote data source.  The layered architecture allows for easy integration of a local database without affecting the existing code structure.
 2.  Add unit tests for the `notes_list_page`, `note_card` and `injection_container`.
 3.  Add internationalisation support and move all strings to an `.arb` file.
-4.  Add GitHub Actions to run tests and dart analyze on every push.
+4.  Add GitHub Actions to run tests and dart analyse on every push.
 5.  Add swipe to refresh functionality on the `NotesListPage`.
 
 ## Screenshots
