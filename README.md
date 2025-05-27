@@ -65,7 +65,7 @@ To run the Flutter Notes App, follow these steps:
 
 2.  Navigate to the project directory:
     ```bash
-        cd flutter_notes_app
+        cd flutter_notes
     ```
 
 3.  Install dependencies:
@@ -96,6 +96,7 @@ To run tests, use the following command:
 ## Future Improvements
 
 1.  Implement persistent storage for notes (e.g., using SQLite or shared preferences).
+    1.  This can be achieved by updating the remote data source.  The layered architecture allows for easy integration of a local database without affecting the existing code structure.
 2.  Add unit tests for the `notes_list_page`, `note_card` and `injection_container`.
 3.  Add internationalisation support and move all strings to an `.arb` file.
 4.  Add GitHub Actions to run tests and dart analyze on every push.
