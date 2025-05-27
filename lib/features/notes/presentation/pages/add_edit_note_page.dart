@@ -5,49 +5,57 @@ import 'package:flutter_notes/features/notes/presentation/bloc/add_edit_note_blo
 import 'package:flutter_notes/injection_container.dart';
 
 class AddEditNotePage extends StatelessWidget {
-  const AddEditNotePage({super.key, this.note});
+  const AddEditNotePage({this.onSuccess, super.key, this.note});
 
   final Note? note;
+  final void Function()? onSuccess;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => sl<AddEditNoteBloc>(param1: note),
-      child: const _AddEditNoteView(),
+    return BlocProvider<AddEditNoteBloc>(
+      create:
+          (context) => AddEditNoteBloc(
+            createNote: sl<CreateNote>(),
+            updateNote: sl<UpdateNote>(),
+            initialNote: note,
+          ),
+      child: AddEditNoteScaffoldListener(
+        onSuccess: onSuccess,
+        child: const AddEditNoteView(key: Key('edit_view')),
+      ),
     );
   }
 }
 
-class _AddEditNoteView extends StatelessWidget {
-  const _AddEditNoteView();
+class AddEditNoteView extends StatelessWidget {
+  const AddEditNoteView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return AddEditNoteScaffoldListener(
-      child: Scaffold(
-        appBar: AppBar(
-          title: BlocBuilder<AddEditNoteBloc, AddEditNoteState>(
-            builder: (_, state) {
-              return Text(state.isEditing ? 'Edit Note' : 'Add Note');
+    return Scaffold(
+      appBar: AppBar(
+        title: BlocBuilder<AddEditNoteBloc, AddEditNoteState>(
+          builder: (_, state) {
+            return Text(state.isEditing ? 'Edit Note' : 'Add Note');
+          },
+        ),
+        actions: [
+          BlocBuilder<AddEditNoteBloc, AddEditNoteState>(
+            builder: (context, state) {
+              if (state.status == AddEditNoteStatus.saving) {
+                return const _Loader(key: Key('loader'));
+              }
+              return _SaveButton(
+                key: const Key('save_button'),
+                enable:
+                    state.isFormValid &&
+                    state.status != AddEditNoteStatus.saving,
+              );
             },
           ),
-          actions: [
-            BlocBuilder<AddEditNoteBloc, AddEditNoteState>(
-              builder: (context, state) {
-                if (state.status == AddEditNoteStatus.saving) {
-                  return const _Loader();
-                }
-                return _SaveButton(
-                  enable:
-                      state.isFormValid &&
-                      state.status != AddEditNoteStatus.saving,
-                );
-              },
-            ),
-          ],
-        ),
-        body: const _AddEditNoteForm(),
+        ],
       ),
+      body: const _AddEditNoteForm(),
     );
   }
 }
@@ -105,6 +113,7 @@ class _AddEditNoteFormState extends State<_AddEditNoteForm> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               TextFormField(
+                key: const Key('title_field'),
                 controller: _titleController,
                 decoration: const InputDecoration(
                   labelText: 'Title',
@@ -126,6 +135,7 @@ class _AddEditNoteFormState extends State<_AddEditNoteForm> {
                 textInputAction: TextInputAction.next,
               ),
               TextFormField(
+                key: const Key('description_field'),
                 controller: _descriptionController,
                 decoration: const InputDecoration(
                   labelText: 'Description',
@@ -153,7 +163,7 @@ class _AddEditNoteFormState extends State<_AddEditNoteForm> {
 
 /// A button to save or update a note.
 class _SaveButton extends StatelessWidget {
-  const _SaveButton({required this.enable});
+  const _SaveButton({required this.enable, super.key});
 
   final bool enable;
 
@@ -177,7 +187,7 @@ class _SaveButton extends StatelessWidget {
 
 /// A simple loader widget to show while saving or updating a note.
 class _Loader extends StatelessWidget {
-  const _Loader();
+  const _Loader({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -195,41 +205,44 @@ class _Loader extends StatelessWidget {
 /// Show a snack bar with the result of saving or updating a note.
 class AddEditNoteScaffoldListener
     extends BlocListener<AddEditNoteBloc, AddEditNoteState> {
-  AddEditNoteScaffoldListener({super.child, super.key})
-    : super(
-        listenWhen: (previous, current) {
-          return previous.status != current.status;
-        },
-        listener: (context, state) async {
-          if (state.status == AddEditNoteStatus.success) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Text(
-                    state.isEditing
-                        ? 'Note updated successfully!'
-                        : 'Note saved successfully!',
-                  ),
-                  duration: const Duration(seconds: 2),
-                ),
-              );
-            if (Navigator.canPop(context)) {
-              // context.read<NotesBloc>().add(const NotesEvent.refreshNotes());
-              Navigator.of(context).pop(true);
-            }
-          } else if (state.status == AddEditNoteStatus.error) {
-            ScaffoldMessenger.of(context)
-              ..hideCurrentSnackBar()
-              ..showSnackBar(
-                SnackBar(
-                  content: Text(
-                    state.errorMessage ?? 'An unknown error occurred.',
-                  ),
-                  backgroundColor: Theme.of(context).colorScheme.error,
-                ),
-              );
-          }
-        },
-      );
+  AddEditNoteScaffoldListener({
+    super.child,
+    void Function()? onSuccess,
+    super.key,
+  }) : super(
+         listenWhen: (previous, current) {
+           return previous.status != current.status;
+         },
+         listener: (context, state) async {
+           if (state.status == AddEditNoteStatus.success) {
+             ScaffoldMessenger.of(context)
+               ..hideCurrentSnackBar()
+               ..showSnackBar(
+                 SnackBar(
+                   content: Text(
+                     state.isEditing
+                         ? 'Note updated successfully!'
+                         : 'Note saved successfully!',
+                   ),
+                   duration: const Duration(seconds: 2),
+                 ),
+               );
+             if (Navigator.canPop(context)) {
+               onSuccess?.call();
+               Navigator.of(context).pop(true);
+             }
+           } else if (state.status == AddEditNoteStatus.error) {
+             ScaffoldMessenger.of(context)
+               ..hideCurrentSnackBar()
+               ..showSnackBar(
+                 SnackBar(
+                   content: Text(
+                     state.errorMessage ?? 'An unknown error occurred.',
+                   ),
+                   backgroundColor: Theme.of(context).colorScheme.error,
+                 ),
+               );
+           }
+         },
+       );
 }

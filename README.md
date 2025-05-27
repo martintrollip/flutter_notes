@@ -6,13 +6,15 @@ A simple note-taking application built with Flutter. This project makes use of b
 
 The Flutter Notes App allows users to create, view, and delete notes. Each note consists of a title and a description. The application is designed with a focus on a maintainable and scalable architecture.
 
+In order to demonstrate error handling, the app includes a simulated API that has latency and can return errors a percentage of the time.
+
 ## Features
 
 The application implements the following core functionalities across a minimal set of screens:
 
 *   **View a list of notes:**
     *   **`NotesListPage`**: Displays all existing notes.
-    *   Handles and displays loading, error, and empty states appropriately.
+    *   Handles and displays loading, error, and empty states.
 
 *   **Create a new note:**
     *   Users can navigate from the `NotesListPage` to an `AddEditNotePage`.
@@ -89,28 +91,15 @@ To run tests, use the following command:
     flutter test
 ```
 
-TODO Prerequisites install Flutter SDK, Dart SDK, and any other dependencies.
+## Future Improvements
+
+1.  Implement persistent storage for notes (e.g., using SQLite or shared preferences).
+2.  Add unit tests for the `notes_list_page` and `injection_container`.
+3.  Add internationalisation support and move all strings to an `.arb` file.
+4.  Add GitHub Actions to run tests and dart analyze on every push.
+5.  Add swipe to refresh functionality on the `NotesListPage`.
+
 TODO Screenshots of the app in action.
-TODO Martin errors (server vs no data) and how the data was mocked
 TODO Martin add screenshots here
 TODO Martin add app icons (also in the readme)
-TODO Martin add features list like swipe to refresh, etc.
-TODO Martin add recommendations like arb and other features
-TODO more well defined exceptions from the remote source and handling 
-TODO Martin setup github action and a status badge
-TODO Martin snap bar for errors and success messages
 TODO Martin remove example package name 
-
-TODO Martin refresh indicator
-//TODO Martin
-// RefreshIndicator
-//  onRefresh: () async {
-        //   final bloc = context.read<NotesBloc>();
-        //   context.read<NotesBloc>().add(const NotesEvent.refreshNotes());
-        //   await bloc.stream.firstWhere(
-        //     (state) => state.status == NotesListStatus.loading,
-        //   );
-        //   await bloc.stream.firstWhere(
-        //     (state) => state.status != NotesListStatus.loading,
-        //   );
-        // },

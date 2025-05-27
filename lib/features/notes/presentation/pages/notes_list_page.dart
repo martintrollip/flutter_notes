@@ -58,7 +58,16 @@ class NotesListPage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute<void>(builder: (_) => const AddEditNotePage()),
+            MaterialPageRoute<void>(
+              builder:
+                  (_) => AddEditNotePage(
+                    onSuccess: () {
+                      context.read<NotesBloc>().add(
+                        const NotesEvent.refreshNotes(),
+                      );
+                    },
+                  ),
+            ),
           );
         },
         tooltip: 'Add Note',

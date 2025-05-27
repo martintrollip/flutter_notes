@@ -336,7 +336,8 @@ void main() {
           final freshDataSource = RemoteDatasourceImpl(source: freshList);
           try {
             await freshDataSource.getAllNotes();
-          } on Exception catch (e) {
+            // ignore: avoid_catches_without_on_clauses
+          } catch (e) {
             if (e.toString().contains('Simulated server error')) {
               errorCaught = true;
               break;
