@@ -1,6 +1,9 @@
 import 'package:dartz/dartz.dart' show Either;
 import 'package:flutter_notes/core/core.dart';
 import 'package:flutter_notes/features/notes/domain/domain.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'delete_note.freezed.dart';
 
 /// Use case for deleting a note
 class DeleteNote with UseCase<void, DeleteNoteParams> {
@@ -14,8 +17,7 @@ class DeleteNote with UseCase<void, DeleteNoteParams> {
   }
 }
 
-class DeleteNoteParams {
-  const DeleteNoteParams({required this.id});
-
-  final String id;
+@freezed
+abstract class DeleteNoteParams with _$DeleteNoteParams {
+  factory DeleteNoteParams({required String id}) = _DeleteNoteParams;
 }

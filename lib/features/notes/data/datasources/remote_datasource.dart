@@ -21,7 +21,11 @@ abstract class RemoteDatasource {
   ///
   /// Returns the updated [Note].
   /// Throws a [Exception] for all error codes.
-  Future<Note> updateNote(Note note);
+  Future<Note> updateNote({
+    required String id,
+    required String title,
+    required String content,
+  });
 
   /// Deletes a note from the server by its [id].
   /// Throws a [Exception] for all error codes.
@@ -34,11 +38,11 @@ abstract class RemoteDatasource {
 /// requests and instead simulates the behavior of a remote datasource by adding
 /// a delay and returning data from an in-memory store.
 ///
-/// - Delays are randomly generated between 500ms and 2500ms to simulate network
-/// latency.
+/// - Delays are randomly generated between 1000ms and 2500ms to simulate
+/// network latency.
 /// - Fails with a 10% chance to simulate server errors.
 class RemoteDatasourceImpl implements RemoteDatasource {
-  RemoteDatasourceImpl({this.source = const []});
+  RemoteDatasourceImpl({List<Note>? source}) : source = source ?? [];
 
   // In-memory store for notes
   final List<Note> source;
@@ -87,19 +91,23 @@ class RemoteDatasourceImpl implements RemoteDatasource {
   }
 
   @override
-  Future<Note> updateNote(Note note) async {
+  Future<Note> updateNote({
+    required String id,
+    required String title,
+    required String content,
+  }) async {
     await _simulateNetworkDelay();
     _simulatePotentialServerError();
 
-    final existingNoteIndex = source.indexWhere((n) => n.id == note.id);
+    final existingNoteIndex = source.indexWhere((n) => n.id == id);
     if (existingNoteIndex == -1) {
-      throw Exception('Note with ID ${note.id} not found');
+      throw Exception('Note with ID $id not found');
     }
 
     final existingNote = source[existingNoteIndex];
     final updatedNote = existingNote.copyWith(
-      title: note.title,
-      content: note.content,
+      title: title,
+      content: content,
       updatedAt: DateTime.now(),
     );
 
@@ -114,9 +122,9 @@ class RemoteDatasourceImpl implements RemoteDatasource {
     }
   }
 
-  // Simulate a delay between 500ms and 2500ms
+  // Simulate a delay between 1000ms and 2500ms
   Future<void> _simulateNetworkDelay() async {
-    final delay = Duration(milliseconds: 500 + _random.nextInt(1000));
+    final delay = Duration(milliseconds: 1000 + _random.nextInt(1000));
     await Future<void>.delayed(delay);
   }
 }

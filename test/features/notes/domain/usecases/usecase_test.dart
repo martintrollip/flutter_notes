@@ -92,7 +92,7 @@ void main() {
         ).thenAnswer((_) async => const Right<Failure, void>(null));
 
         // Act
-        final result = await usecase(const DeleteNoteParams(id: tId));
+        final result = await usecase(DeleteNoteParams(id: tId));
 
         // Assert
         expect(result, const Right<Failure, void>(null));
@@ -112,7 +112,7 @@ void main() {
         ).thenAnswer((_) async => const Left(tFailure));
 
         // Act
-        final result = await usecase(const DeleteNoteParams(id: tId));
+        final result = await usecase(DeleteNoteParams(id: tId));
 
         // Assert
         expect(result, const Left<Failure, void>(tFailure));
