@@ -4,6 +4,10 @@ import 'package:intl/intl.dart';
 
 enum _NoteCardOption { delete }
 
+/// Displays a card for a note with options to delete it.
+///
+/// The card shows the note's title, content, creation date, and
+/// last updated date, if applicable.
 class NoteCard extends StatelessWidget {
   const NoteCard({
     required this.note,
@@ -13,7 +17,7 @@ class NoteCard extends StatelessWidget {
   });
 
   final Note note;
-  final void Function(Note note) onTap;
+  final void Function() onTap;
   final VoidCallback onDelete;
 
   String _formatDateTime(DateTime dateTime) {
@@ -26,7 +30,7 @@ class NoteCard extends StatelessWidget {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: InkWell(
-        onTap: () => onTap(note),
+        onTap: onTap,
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(

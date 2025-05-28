@@ -13,12 +13,7 @@ class AddEditNotePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<AddEditNoteBloc>(
-      create:
-          (context) => AddEditNoteBloc(
-            createNote: sl<CreateNote>(),
-            updateNote: sl<UpdateNote>(),
-            initialNote: note,
-          ),
+      create: (context) => sl<AddEditNoteBloc>(param1: note),
       child: AddEditNoteScaffoldListener(
         onSuccess: onSuccess,
         child: const AddEditNoteView(key: Key('edit_view')),

@@ -23,17 +23,18 @@ class NotesListPage extends StatelessWidget {
         builder: (context, state) {
           switch (state.status) {
             case NotesListStatus.initial:
+            // fallthrough
             case NotesListStatus.loading:
               return const Center(child: CircularProgressIndicator());
-            case NotesListStatus.empty:
-              return const MessageDisplay(
-                icon: Icons.notes_rounded,
-                message: 'Tap + to add your first note!',
-              );
             case NotesListStatus.failure:
               return MessageDisplay(
                 icon: Icons.error_outline_rounded,
                 message: state.errorMessage ?? 'Unknown error',
+              );
+            case NotesListStatus.empty:
+              return const MessageDisplay(
+                icon: Icons.notes_rounded,
+                message: 'Tap + to add your first note!',
               );
             case NotesListStatus.success:
               final notes = state.notes ?? [];
@@ -48,7 +49,7 @@ class NotesListPage extends StatelessWidget {
                   final note = notes[index];
                   return NoteCard(
                     note: note,
-                    onTap: (note) {
+                    onTap: () {
                       _onNoteTap(context, note);
                     },
                     onDelete: () {

@@ -38,7 +38,7 @@ abstract class RemoteDatasource {
 /// requests and instead simulates the behavior of a remote datasource by adding
 /// a delay and returning data from an in-memory store.
 ///
-/// - Delays are randomly generated between 1000ms and 2500ms to simulate
+/// - Delays are randomly generated between 1000ms and 2000ms to simulate
 /// network latency.
 /// - Fails with a 10% chance to simulate server errors.
 class RemoteDatasourceImpl implements RemoteDatasource {
@@ -122,7 +122,7 @@ class RemoteDatasourceImpl implements RemoteDatasource {
     }
   }
 
-  // Simulate a delay between 1000ms and 2500ms
+  // Simulate a delay between 1000ms and 2000ms
   Future<void> _simulateNetworkDelay() async {
     final delay = Duration(milliseconds: 1000 + _random.nextInt(1000));
     await Future<void>.delayed(delay);
